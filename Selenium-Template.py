@@ -28,7 +28,7 @@ options.add_argument("--disable-application-cache")
 options.add_argument("--enable-do-not-track")
 options.add_argument("--disable-popup-blocking")
 
-options.binary_location = '/snap/bin/chromium'
+options.binary_location =  '/usr/bin/chromium'
 
 service = Service('/usr/bin/chromedriver')
 
