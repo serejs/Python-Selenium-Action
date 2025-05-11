@@ -21,12 +21,14 @@ jobs:
       - name: Install xvfb
         run: sudo apt-get install xvfb unzip
 
-      - name: Running the Python script
+      - name: Install drive
         run: |
             wget https://chromedriver.storage.googleapis.com/92.0.4515.107/chromedriver_linux64.zip
             unzip chromedriver_linux64.zip
             sudo mv chromedriver /usr/bin/chromedriver
             sudo chown root:root /usr/bin/chromedriver
             sudo chmod +x /usr/bin/chromedriver
+      - name: Runthe python
+        run: | 
             python Selenium-Template.py
       
