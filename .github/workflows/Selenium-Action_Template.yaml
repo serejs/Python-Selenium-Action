@@ -25,11 +25,11 @@ jobs:
         run: |
             wget https://chromedriver.storage.googleapis.com/92.0.4515.107/chromedriver_linux64.zip
             unzip chromedriver_linux64.zip
-            sudo mkdir /snap/bin/
-            sudo mv chromedriver /snap/bin/chromedriver
-            sudo chown root:root /snap/bin/chromedriver
+            sudo mkdir /snap/bin/chromium
+            sudo mv chromedriver /snap/bin/chromium/chromedriver
+            sudo chown root:root /snap/bin/chromium
             sudo chmod +x /snap/bin/chromedriver
-      - name: Runthe python
+      - name: Run the python
         run: | 
             python Selenium-Template.py
       
