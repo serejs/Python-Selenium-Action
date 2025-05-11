@@ -19,8 +19,15 @@ jobs:
       - name: Installing all necessary packages
         run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay beautifulsoup4 mysql-connector
       - name: Install xvfb
-        run: sudo apt-get install xvfb
+        run: sudo apt-get install xvfb unzip
 
       - name: Running the Python script
-        run: python Selenium-Template.py
+        run: |
+        wget https://chromedriver.storage.googleapis.com/92.0.4515.107/chromedriver_linux64.zip
+        unzip chromedriver_linux64.zip
+        sudo mv chromedriver /usr/bin/chromedriver
+        sudo chown root:root /usr/bin/chromedriver
+        sudo chmod +x /usr/bin/chromedriver
+
+        python Selenium-Template.py
       
