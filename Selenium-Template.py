@@ -1,40 +1,44 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-import chromedriver_autoinstaller
-from pyvirtualdisplay import Display
-display = Display(visible=0, size=(800, 800))  
-display.start()
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
+import time
+from datetime import date, datetime, timedelta
+from bs4 import BeautifulSoup as bs4
+import mysql.connector
+import re
 
-chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
-                                      # and if it doesn't exist, download it automatically,
-                                      # then add chromedriver to path
+# Configura il percorso di Chrome
+options = Options()
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument('--headless=new')
+options.add_argument('--disable-gpu')
+options.add_argument('--disable-extensions')
+options.add_argument('--remote-debugging-port=9222')  # Specify a port
+options.add_argument('--disable-setuid-sandbox')
 
-chrome_options = webdriver.ChromeOptions()    
-# Add your options as needed    
-options = [
-  # Define window size here
-   "--window-size=1200,1200",
-    "--ignore-certificate-errors"
- 
-    #"--headless",
-    #"--disable-gpu",
-    #"--window-size=1920,1200",
-    #"--ignore-certificate-errors",
-    #"--disable-extensions",
-    #"--no-sandbox",
-    #"--disable-dev-shm-usage",
-    #'--remote-debugging-port=9222'
-]
+options.add_argument("--incognito")
+options.add_argument("--disable-application-cache")
+options.add_argument("--enable-do-not-track")
+options.add_argument("--disable-popup-blocking")
 
-for option in options:
-    chrome_options.add_argument(option)
+options.binary_location = '/snap/bin/chromium'
 
-    
-driver = webdriver.Chrome(options = chrome_options)
+service = Service('/usr/bin/chromedriver')
 
-driver.get('http://github.com')
-print(driver.title)
-with open('./GitHub_Action_Results.txt', 'w') as f:
-    f.write(f"This was written with a GitHub action {driver.title}")
+driver = webdriver.Chrome(service=service, options=options)
 
+driver.get("https://www.google.com")
+
+time.sleep(2)
+
+title = driver.title
+print("Title of the page:", title)
+
+driver.quit()
