@@ -30,7 +30,8 @@ jobs:
             whereis chromium
       - name: Install drivers
         run: |
-            wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+            # wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+            wget https://storage.googleapis.com/chrome-for-testing-public/136.0.7103.92/linux64/chromedriver-linux64.zip
             unzip chromedriver_linux64.zip
             sudo mv chromedriver /usr/bin/chromedriver
             sudo chown root:root /usr/bin/chromedriver
