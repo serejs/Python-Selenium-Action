@@ -27,6 +27,7 @@ jobs:
             sudo dpkg -i google-chrome-stable_current_amd64.deb
             sudo apt-get install -f
             google-chrome --version
+            whereis chromium
       - name: Install drivers
         run: |
             wget https://chromedriver.storage.googleapis.com/92.0.4515.107/chromedriver_linux64.zip
