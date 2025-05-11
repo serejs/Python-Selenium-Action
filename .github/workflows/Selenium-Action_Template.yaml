@@ -20,15 +20,20 @@ jobs:
         run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay beautifulsoup4 mysql-connector
       - name: Install xvfb
         run: sudo apt-get install xvfb unzip
-
+      - name: install chrome
+        run: |
+            sudo apt update
+            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            sudo dpkg -i google-chrome-stable_current_amd64.deb
+            sudo apt-get install -f
+            google-chrome --version
       - name: Install drivers
         run: |
             wget https://chromedriver.storage.googleapis.com/92.0.4515.107/chromedriver_linux64.zip
             unzip chromedriver_linux64.zip
-            sudo mkdir /snap/bin
-            sudo mv chromedriver /snap/bin/chromium
-            sudo chown root:root /snap/bin/chromium
-            sudo chmod +x /snap/bin/chromium
+            sudo mv chromedriver /usr/bin/chromedriver
+            sudo chown root:root /usr/bin/chromedriver
+            sudo chmod +x /usr/bin/chromedriver
       - name: Run the python
         run: | 
             python Selenium-Template.py
